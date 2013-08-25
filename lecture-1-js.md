@@ -280,6 +280,19 @@ One of the neat syntactic features in JavaScript is that you can replace propert
 
 
 # References
+The following references are helpful in learning more about JavaScript and in solving problems as they come up:
 
+* [Effective JavaScript](http://effectivejs.com/):  Good reference for those coming from a C++/Java background covers all the important parts.
+* [Eloquent JavaScript](http://eloquentjavascript.net/): A bit slower than effective JavaScript.  Might be better for those with less programming experience.  Also available for free online.
+* [Mozilla Developer's Network](https://developer.mozilla.org/en-US/) A collection of community written reference articles maintained by Mozilla.
+* [Stack Overflow](http://stackoverflow.com/) A free question & answer site with pretty good moderation.
 
+There is also a sequence of exercises at codeacademy that can help you get a better handle on the basics, though it is a bit more focused on beginners.  If you are looking for some extra practice it might not be bad to give it a shot working through some of the exerceise:
 
+* [CodeAcademy JavaScript](http://www.codecademy.com/tracks/javascript)
+
+## Warning
+JavaScript is an enormously popular language, and so there is a large industry that has grown up around it.  However, there are some sources which claim to be authoritative on JavaScript but provide misinformation and may confuse beginners.  You should stay clear of the following websites
+
+* W3 Schools: Just avoid this website.  Lots of the content is either wrong or misleading, yet it remains high in the Google search rankings due to the manipulative practices of the website.  For more information see [w3fools.com](http://www.w3fools.com/)
+* Experts Exchange: This site requires payments to access most content, and a lot of the headlines.  Thankfully stack overflow has mostly surpassed it in search rankings so you don't see it around as much these days.
