@@ -1,5 +1,5 @@
-CS558 Supplementary Lecture 1: How to use node.js
-=================================================
+CS558 Supplementary Lecture 1: JavaScript
+=========================================
 We are experimenting with the structure of CS558 this semester.  Unlike in previous years, we are going to put a stronger emphasis on technical skills and implementation this semester.  In particular, one of the main goals of this course is to encourage student collaboration and to this end you will each be publishing open source software in the form of modules for node.js each week.  As the course progresses you will be able to use both your own modules and the modules that other students have written.  At the half way point in the course, we will switch into a project focused mode where all the modules written so far will be available for you to use in creating something yourself.
 
 ## Why use JavaScript and node.js?
@@ -203,6 +203,7 @@ There are also a number of built in functions that make programming JavaScript e
 * There is also built in support for regular expressions, with a perl-like syntax
 
 
-
+## Further topics
+The above material pretty much covers all the basics of JavaScript.
 
 
