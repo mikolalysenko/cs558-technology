@@ -82,6 +82,36 @@ false
 
 For this reason, it is generally preferred to use the `===` operator unless you explicitly want to do the type coercion.
 
+## Statements
+Just like C++ or Java, JavaScript is basically an imperative language (comapred to an expression based language like Lisp or Scheme).  Programs in JavaScript consist of sequences of commands that are executed sequentially.  In JavaScript, each statement is written on its own line.  For example,
+
+```javascript
+var x = 1
+var y = 2
+var z = x + y
+```
+
+You can also write multiple statements on the same line using semicolons (though it is maybe debatable how often this is a good idea):
+
+```javascript
+var x = 1
+var y = 2
+x = y + 1; y = x + 2;
+```
+
+You can also use standard structured programming constructs like for/while loops and if statements, and they work exactly the same as in any other C-like language.  For example,
+
+```javascript
+var j = 0
+for(var i=0; i<10; ++i) {
+  if(i % 2 === 0) {
+    j += 1
+  } else {
+    j += 3
+  }
+}
+```
+
 ## Functions
 There are two basic ways to declare a function in JavaScript.
 
@@ -110,10 +140,67 @@ However, unlike in C++ or Java, functions in JavaScript have lexical scoping.  T
 
 ## Objects
 
-Objects in JavaScript are very different than in C++ or Java.  Unlike most other languages JavaScript objects are dynamic in the sense that they can have extra names and values added to them at run time.
+Objects in JavaScript are very different than in C++ or Java.  Unlike most other languages JavaScript objects are dynamic in the sense that they can have extra names and values added to them at run time.  There are two basic ways to create an object in JavaScript:
 
 
-JavaScript objects are collections of names and values, however because JavaScript is a dynamic language we can add more properties to an object at run time.  There are two basic ways to create an initially empty object in JavaScript:
+Using JSON syntax:
+```javascript
+var obj = {
+  foo: 1,
+  bar: "xyz",
+  subobject: {
+    z: false
+  }
+}
+```
+
+Or using the `new` keyword:
+
+```javascript
+function Point(x, y, z) {
+  this.x = x
+  this.y = y
+  this.z = z
+}
+
+var p = new Point(1,2,3)
+```
+
+We can access the items within an object using either the square brackets `[]` or `.` syntax just like in Java:
+
+```javascript
+obj["foo"] = 1
+obj.bar = false
+```
+
+Assigning to a name in an object creates a new value.  In this way, it is possible to use objects like a hash map.
+
+You can iterate over all the names in an object using a for in loop:
+
+```javascript
+for(var name in obj) {
+  console.log("key:", name, ", value:", obj[name])
+}
+```
+
+### Arrays
+Arrays are implemented as a special kind of object in JavaScript.  To declare an array, you use square brackets:
+
+```javascript
+var x = [1,2,3,4]
+console.log(x[2])
+```
+
+You can use arrays in JavaScript kind of like B-trees.  It is possible to search and insert into them using the `splice` method.
+
+## Builtins
+There are also a number of built in functions that make programming JavaScript easier.  Here is a quick overview:
+
+* `Math` The math object exposes a bunch of basic functions for doing arithmetic.  For example, `Math.sin`, `Math.sqrt`, etc.
+* Strings have a number of builtins
+* Arrays also have many useful built in functions
+* The `Date` class lets you access timing and date specific functions
+* There is also built in support for regular expressions, with a perl-like syntax
 
 
 
