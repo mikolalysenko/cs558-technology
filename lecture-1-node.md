@@ -34,7 +34,47 @@ Here you can type in JavaScript and execute it directly in your browser without 
 
 ## Basic JavaScript
 
-JavaScript is a dynamically typed object oriented language. This means that the types of variables are determined at run time.  For example, to declare a variable `a` and initialize it with an integer value of `1` we can write in JavaScript:
+JavaScript is a dynamically typed object oriented language. The syntax of JavaScript is a lot like C++, so for example:
+
+```javascript
+// This is a comment
+/* And so is this */
+```
+Just like C++ or Java, JavaScript is an imperative language (compared to an expression based language like Lisp or Scheme).  Programs in JavaScript consist of sequences of commands that are executed serially.  However unlike C++, semicolons in JavaScript are optional.  You only need to add them if you want to put multiple statements on the same line.  So this,
+
+```javascript
+x = 1
+y = 2
+```
+
+Is the same as this,
+
+```javascript
+x = 1;
+y = 2;
+```
+
+Which is the same as this,
+
+```javascript
+x = 1; y = 2
+````
+
+You can also use standard structured programming constructs like for/while loops and if statements, and they work exactly the same as in any other C-like language.  For example,
+
+```javascript
+var j = 0
+for(var i=0; i<10; ++i) {
+  if(i % 2 > 0) {
+    j += 1
+  } else {
+    j += 3
+  }
+}
+```
+
+## Types in JavaScript
+Coming from a C++/Java background the weirdest thing about JavaScript is its dynamic typing system.  This means that the types of variables are determined at run time.  For example, to declare a variable `a` and initialize it with an integer value of `1` we can write in JavaScript:
 
 ```javascript
 var a = 1
@@ -82,36 +122,6 @@ false
 
 For this reason, it is generally preferred to use the `===` operator unless you explicitly want to do the type coercion.
 
-## Statements
-Just like C++ or Java, JavaScript is basically an imperative language (comapred to an expression based language like Lisp or Scheme).  Programs in JavaScript consist of sequences of commands that are executed sequentially.  In JavaScript, each statement is written on its own line.  For example,
-
-```javascript
-var x = 1
-var y = 2
-var z = x + y
-```
-
-You can also write multiple statements on the same line using semicolons (though it is maybe debatable how often this is a good idea):
-
-```javascript
-var x = 1
-var y = 2
-x = y + 1; y = x + 2;
-```
-
-You can also use standard structured programming constructs like for/while loops and if statements, and they work exactly the same as in any other C-like language.  For example,
-
-```javascript
-var j = 0
-for(var i=0; i<10; ++i) {
-  if(i % 2 === 0) {
-    j += 1
-  } else {
-    j += 3
-  }
-}
-```
-
 ## Functions
 There are two basic ways to declare a function in JavaScript.
 
@@ -138,9 +148,23 @@ However, unlike in C++ or Java, functions in JavaScript have lexical scoping.  T
 
 <img src="lecture1/addOne.png">
 
-## Objects
+JavaScript has a number of useful functions built into the language.  For example, to print some debug information in JavaScript you can use the console.log() function:
 
-Objects in JavaScript are very different than in C++ or Java.  Unlike most other languages JavaScript objects are dynamic in the sense that they can have extra names and values added to them at run time.  There are two basic ways to create an object in JavaScript:
+```javascript
+console.log("test") //Prints test
+```
+
+### Callbacks and timers
+One important principle in JavaScript is that IO and user interactions are asynchronous.  However, JavaScript itself is a single threaded language and doesn't support concepts like parallel execution.  Instead, JavaScript uses callbacks to achieve parallel execution.  For example, to log a message 5 seconds in the future we can schedule an event using the setTimeout command:
+
+```javascript
+setTimeout(function() { console.log("hello") }, 5000)
+```
+
+The setTimeout command takes two arguments, a callback and a number reprsenting the number of milliseconds in the future that the event will be triggered.  The way JavaScript executes is that there is an internal event loop that selects the next available callback and runs it.  This is in contrast to languages like C++ or Java which maintain total control of the CPU at all times.  There are a number of advantages to event based concurrency, though we will say more about this in the next lecture on node.js.
+
+## Objects
+As would be expected from the type system, objects in JavaScript are very different than in C++ or Java.  Unlike most other languages JavaScript objects are dynamic in the sense that they can have extra names and values added to them at run time.  There are two basic ways to create an object in JavaScript:
 
 
 Using JSON syntax:
@@ -155,7 +179,6 @@ var obj = {
 ```
 
 Or using the `new` keyword:
-
 ```javascript
 function Point(x, y, z) {
   this.x = x
@@ -175,6 +198,21 @@ obj.bar = false
 
 Assigning to a name in an object creates a new value.  In this way, it is possible to use objects like a hash map.
 
+Just like in Java, all JavaScript objects are passed by reference.  So, the following snippet:
+
+```javascript
+var a = { foo: 1 }
+var b = a
+b.foo = 2
+console.log(a.foo)
+```
+
+Will print out,
+
+```javascript
+2
+```
+
 You can iterate over all the names in an object using a for in loop:
 
 ```javascript
@@ -182,6 +220,10 @@ for(var name in obj) {
   console.log("key:", name, ", value:", obj[name])
 }
 ```
+
+In this way it is very easy to reflect into an object at run time, or to use an object as a container.
+
+One very useful pair of functions in JavaScript are the JSON.stringify and JSON.parse methods.  These pair of functions let you serialize and deserialize JavaScript objects providing that they contain no cyclic references.
 
 ### Arrays
 Arrays are implemented as a special kind of object in JavaScript.  To declare an array, you use square brackets:
@@ -191,7 +233,28 @@ var x = [1,2,3,4]
 console.log(x[2])
 ```
 
-You can use arrays in JavaScript kind of like B-trees.  It is possible to search and insert into them using the `splice` method.
+Unlike objects, arrays have an extra property called `.length` which gives you the number of items in the array.  For example,
+
+```javascript
+> [2,5].length
+2
+```
+
+You can also mutate the contents of an array using the push, pop, shift and unshift methods.  These tools let you use any array as a stack, queue or deque:
+
+* `shift` removes an item from the front of an array
+* `unshift` adds an item to the front of an array
+* `pop` removes an item from the end of an array
+* `push` appends an item to the end of an array
+
+There is also a more powerful method for mutating arrays called `splice` which allows you to use them like a B-tree.  `splice` lets you insert or delete contiguous subsequences from an array.  For example,
+
+```javascript
+var x = [1,2,3,4]
+x.splice(2, 1, 5, 6)   //At position 2, remove 1 element and insert the sequence [5,6]
+console.log(x)
+//Prints:  [1, 2, 5, 6, 4]
+```
 
 ## Builtins
 There are also a number of built in functions that make programming JavaScript easier.  Here is a quick overview:
@@ -201,9 +264,22 @@ There are also a number of built in functions that make programming JavaScript e
 * Arrays also have many useful built in functions
 * The `Date` class lets you access timing and date specific functions
 * There is also built in support for regular expressions, with a perl-like syntax
-
+* Finally, there are Lispy functional programming methods for currying and calling functions.  In particular, .call, .apply and .bind are very useful, along with the array methods .map and .forEach.
 
 ## Further topics
-The above material pretty much covers all the basics of JavaScript.
+The above material pretty much covers all the basics of JavaScript.  The fact that we can cover the whole language in such a short amount of time is really a testament to the simplicity of JavaScript as a language.  However, there are a few things that you ought to study on your own as the semester progresses.
+
+### prototypes
+JavaScript does not support a classical inheritance model, but for performance reasons it does allow for the use of object templates or prototypes.  You should read about prototypes on your own to understand how this works and be able to explain when and why you might use a prototype to instantiate an object.
+
+### Typed arrays
+Typed arrays are a relatively new feature in JavaScript, but they offer enormous performance benefits.  Unlike regular arrays which are basically objects, typed arrays are contiguous binary blocks of memory and have an enforced integer/floating point type.  Using typed arrays judiciously can give a large performance benefit in many applications.
+
+### Defined properties
+One of the neat syntactic features in JavaScript is that you can replace properties of objects with functions using the Object.defineProperty.
+
+
+# References
+
 
 
