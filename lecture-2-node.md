@@ -166,11 +166,14 @@ node main.js
 
 Will then print out `3`.
 
-
+Using modules it is possible to split large programs into smaller pieces which makes them easier to develop.  Designing small and consistent interfaces for modules also makes it much easier to test and iterate on their design and implementation.
 
 # npm
 
+One of the most powerful tools available that comes with node is npm, or the node package manager.  npm gives you access to an enormous repository of free modules that can help you do specific tasks.  Modules can do things like implement algorithms or data structures, or give you access to other libraries and services like databases.  The main thing that npm does is that it simplifies the process of sharing and installing modules that other people have written.
+
 ## Installing modules
+For example, suppose we wanted to write an application
 
 ## Publishing modules
 
@@ -183,8 +186,15 @@ Semantic versioning
 
 
 
-# Using CommonJS and npm in the browser
+# Further topics
+The above information is just a brief introduction to node.js.  There is a lot more stuff out there to learn about, especially in terms of getting to grips with all o
 
+## Using CommonJS and npm in the browser
+There are a number of tools that let you use CommonJS modules and npm modules within a browser.  Of these, the most popular and best supported tool is called [browserify](http://browserify.org/).  Browserify statically inspects your JavaScript code, walks the file system and builds a single JavaScript file that you can put on a web page and use in your browser.
+
+However, there are simpler options if you just want to get started writing code that runs in a browser right away.  One of the easier options that is built on top of browserify is a tool called [beefy](http://didact.us/beefy/) that creates a live reloadable server so you can see the changes of your code in real time.  Another useful resource is [requirebin](http://requirebin.com/), which lets you write JavaScript that uses npm modules directly within your browser.
+
+## Testing modules
 
 
 # References
