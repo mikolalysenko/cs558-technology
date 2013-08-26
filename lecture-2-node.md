@@ -134,10 +134,38 @@ And in the terminal you should see a log of the request that looks like,
 Again, to learn more about how HTTP works in node you can [read the documentation](http://nodejs.org/api/http.html).
 
 # CommonJS modules
+After IO primitives, the most important feature that node.js offers is a module system.  JavaScript as a language, much like C or C++ does not come with any built in support for modules.  However, it is quite possible to add modules to a given JavaScript environment and there have been many attempts to do so.  The most successful of these proposals has been the CommonJS module system.
+
+The CommonJS module specification is very simple, and you can read the [whole specification complete with an example here](http://wiki.commonjs.org/wiki/Modules/1.1). There is also a discussion of [node.js' implementation of CommonJS in great detail in the API documentation](http://nodejs.org/api/modules.html).
 
 ## Using modules
+It is pretty easy to use CommonJS modules in a node program.  In the previous examples, the `fs` and `http` modules were loaded using the same CommonJS system.  To create a new module, all you have to do is make a JavaScript file, and somewhere in there assign to the `module.exports` variable.  This variable determines the result of requiring that module.  For example, say that we have a file called `mymod.js`, whose contents are as follows,
 
-## Creating modules
+```javascript
+//Contents of mymod.js
+module.exports = {
+  a: 1,
+  b: 2
+}
+```
+
+And then we have another file called `main.js`, which looks like this:
+
+```javascript
+//Contents of main.js
+var mymod = require("./mymod.js")
+
+console.log(mymod.a + mymod.b)
+```
+
+Typing,
+
+```sh
+node main.js
+```
+
+Will then print out `3`.
+
 
 
 # npm
