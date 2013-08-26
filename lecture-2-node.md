@@ -170,10 +170,51 @@ Using modules it is possible to split large programs into smaller pieces which m
 
 # npm
 
-One of the most powerful tools available that comes with node is npm, or the node package manager.  npm gives you access to an enormous repository of free modules that can help you do specific tasks.  Modules can do things like implement algorithms or data structures, or give you access to other libraries and services like databases.  The main thing that npm does is that it simplifies the process of sharing and installing modules that other people have written.
+One of the most powerful tools available that comes with node is npm, or the node package manager.  npm gives you access to an enormous repository of free modules that can help you do specific tasks.  Modules can do things like implement algorithms or data structures, or give you access to other libraries and services like databases.  The main thing that npm does is that it simplifies the process of sharing and installing modules that other people have written.  You can see a full directory of those modules on [npmjs.org](http://npmjs.org).
 
 ## Installing modules
-For example, suppose we wanted to write an application
+For example, suppose we wanted to write an application that tells users what day it is in a robotic voice (an arbitrary task admittedly).  However, node.js does not come with any built in tools to do text to speech.  Fortunately, there are tons of ways to solve this problem on npm!  Searching around a bit, we come across the following library:
+
+[<img src="lecture2/mespeak.png">](https://npmjs.org/package/mespeak)
+
+To install this package, all we have to do is tell npm install it.  This can be done using the `npm install` command:
+
+```
+npm install mespeak
+```
+
+Once you type that command, npm will go out the central repository, find the package and install it locally in the node_modules/ folder where you ran the command:
+
+<img src="lecture2/usingnpm.png">
+
+To use the module we just installed, you can `require()` it just like we did earlier using the fs and http modules.  It is also possible to require files within a module by doing,  `require("modulename/subfile.js")`.  In the case of the mespeak module, here is how we can use it to create that say the time server we wanted to build:
+
+```javascript
+//Load http module like before
+var http = require("http")
+
+//Next load up and configure the mespeak module we just installed
+var mespeak = require("mespeak")
+mespeak.loadVoice(require("mespeak/voices/en/en-us.json"))
+
+//Next create the HTTP server
+http.createServer(function(request, response) {
+  
+  //Get the current day and convert it into a string
+  var dateStr = "today is " + (new Date()).toLocaleDateString()
+  
+  //Use mespeak to conver the date text into a voice
+  var dateVoice = mespeak.speak(dateStr, {rawdata: "buffer"})
+
+  //Content type is now an audio file
+  response.setHeader("Content-Type", "audio/wav")
+  response.end(dateVoice)
+  
+}).listen(8080)
+
+console.log("listening on port 8080")
+```
+
 
 ## Publishing modules
 
