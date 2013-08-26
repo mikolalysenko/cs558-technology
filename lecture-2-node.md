@@ -258,7 +258,7 @@ The resulting package.json file then looks like the following:
 
 Once this is all done, you can publish your module on npm using [npm publish](https://npmjs.org/doc/cli/npm-publish.html):
 
-<img src="lecture2/npmpublish.png>
+<img src="lecture2/npmpublish.png">
 
 After that, your module will show up on npm and then other people can install and use it in their own projects!
 
