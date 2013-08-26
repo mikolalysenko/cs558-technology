@@ -215,16 +215,52 @@ http.createServer(function(request, response) {
 console.log("listening on port 8080")
 ```
 
+Now if you run that script and connect to the server, you should hear a robot tell you the current date.  You can find lots of other useful modules on npm to do all sorts of useful and interesting things, and learning to make effective and critical use of it is the most important part of learning node.js.
 
 ## Publishing modules
+You may wonder perhaps who creates all of these modules on npm, and who decides how they get there.  The answer is that anyone can create a module, and barring modules which are abusive/destructive there is no restriction on what you can put on there.  In fact, throughout this course you will all be writing and publishing your own modules on npm, and (hopefully) learning from and using the modules that others have written.
 
-Package.json
+To create a module yourself, you first need to create a user account on npm.  This can be done using the [`npm adduser` command](https://npmjs.org/doc/cli/npm-adduser.html).  To run this, just type in `npm adduser` in your shell and then type in the username, password and email address that you want to use to publish packages on npm.
 
-npm init
+Once that is done, let's create a simple module that we can publish on npm.  To do this, let's create a new directory for the module and add a file called index.js for the module.  In that file, add the following contents:
 
-Semantic versioning
+```javascript
+//Contents of index.js
+module.exports = function(x) { 
+  return x + 1
+}
+```
 
+This module defines a function that takes a number x as input and adds 1 to it.  To publish this module, we need to create a package.json file that keeps track of meta data, like the dependencies of the module, its version information, the owners/maintainers and so on.  You can write the package.json file yourself, or you can use npm to help you fill in the necessary fields with minimal headache using the [npm init command](https://npmjs.org/doc/cli/npm-init.html).  Here is an example of what such a session looks like:
 
+<img src=lecture2/npminit.png>
+
+The resulting package.json file then looks like the following:
+
+```javascript
+{
+  "name": "trivial-module",
+  "version": "0.0.0",
+  "description": "A trivial module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "trivial",
+    "add",
+    "one"
+  ],
+  "author": "Mikola Lysenko",
+  "license": "BSD-2-Clause"
+}
+```
+
+Once this is all done, you can publish your module on npm using [npm publish](https://npmjs.org/doc/cli/npm-publish.html):
+
+<img src="lecture2/npmpublish.png>
+
+After that, your module will show up on npm and then other people can install and use it in their own projects!
 
 
 # Further topics
@@ -236,7 +272,40 @@ There are a number of tools that let you use CommonJS modules and npm modules wi
 However, there are simpler options if you just want to get started writing code that runs in a browser right away.  One of the easier options that is built on top of browserify is a tool called [beefy](http://didact.us/beefy/) that creates a live reloadable server so you can see the changes of your code in real time.  Another useful resource is [requirebin](http://requirebin.com/), which lets you write JavaScript that uses npm modules directly within your browser.
 
 ## Testing modules
+One of the most important aspects of modules is verifying that they are correct.  Automated testing is probably the most reliable and popular way to solve this problem.  In node.js/JavaScript, there are a huge number of frameworks for solving this problem with varying degrees of complexity and sophistication.  However, the best supported and most standard system for verifying node.js scripts is the [test anything protocol](http://testanything.org/wiki/index.php/Main_Page) or tap.  tap was originally built back in the 90s to help with verifying perl modules, though today the same system has been extended and ported to many languages including C++, PHP, Python and even node.js.
 
+In node.js, tap is the closest thing to an officially sanctioned testing protocol and it is very easy to set up.  All you do is install the tap program using npm:
+
+```javascript
+npm install tap
+```
+
+And then you can use it to generate test cases for your scripts.  For more information, see the tap github page:
+
+* [https://github.com/isaacs/node-tap](https://github.com/isaacs/node-tap)
+
+There are a couple of other tap implementations for node.js that are worth mentioning.  In particular, there is [`tape`](https://npmjs.org/package/tape) which is a tool that lets you reuse your tap testing harness in both the browser and in node.js.
+
+You can also use npm scripts to automate your testing.  In the "script" section of your package.json, you can add a field called "test" which tells npm what to run when testing your module.  For more information, see the documentation on [npm scripts](https://npmjs.org/doc/scripts.html).
+
+## Streams
+The last major part of node which we didn't talk about much are [streams](http://nodejs.org/api/stream.html#stream_stream).  Streams in node.js solve the problem of how to abstract IO operations between processes that may produce and consume events at widely different rates.  Unlike simple callback based IO, streams introduce a concept called "backpressure" which means that a stream consumer tell the event emitter to back off on sending it so much stuff if it becomes congested.  It turns out that this model of backpressure based routing converges to optimal throughput, but discussing the details of how this is proven would turn this into a systems class.  For most of the exercises in this class, you won't have to know much about streams but they are there and if you get a moment you should read about them and try to understand how they work.
 
 # References
+The definitive reference on node.js is the API documentation, which is quite compact and readable:
+
+* [http://nodejs.org/api/](http://nodejs.org/api/)
+
+To learn more about npm, you can also read its documentation here,
+
+* [https://npmjs.org/doc/](https://npmjs.org/doc/)
+
+For a tutorial introduction to node.js check out Max Ogden's Art of Node:
+
+* [Art of Node](https://github.com/maxogden/art-of-node#the-art-of-node)
+
+Also, there are a few interactive tutorials that you can run from the terminal to learn node.js, just like in CodeAcademy.  Try out,
+
+* [Learn you the node](https://github.com/rvagg/learnyounode#learn-you-the-nodejs-for-much-win)
+* [Stream adventure (more advanced)](https://github.com/substack/stream-adventure)
 
