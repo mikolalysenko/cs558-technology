@@ -213,7 +213,15 @@ Will print out,
 2
 ```
 
-You can iterate over all the names in an object using a for in loop:
+Just like object references in Java an pointers in C, object references in JavaScript are nullable.  To create a null object reference, you can use the keyword `null`:
+
+```javascript
+var nullref = null
+```
+
+If you try to access the properties of a null object in JavaScript, the run time will thrown an exception just like in Java.
+
+One thing that is unique about JavaScript is that you can iterate over all the names in an object using a for in loop:
 
 ```javascript
 for(var name in obj) {
