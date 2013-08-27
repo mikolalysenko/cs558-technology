@@ -202,19 +202,67 @@ To verify this you can check the status using `git status` and manually go throu
 One of the most important aspects of branching is that this is how git also handles undoing and reverting actions.  Once you've made a commit in git, it is there for all time.  You can never permanently delete data from git, which greatly improves the robustness of the system.  Instead, if you want to go back to an earlier revision.  For example, if you want to go back to a previous version of your code, you can use the git checkout command again to revert to a previous using `git checkout` followed by the commit hash:
 
 
-To make changes to this commit, you can make a branch and update it.
-
+To make changes to this commit, you can make a branch and update it just as before.
 
 
 Collaborating using github
 ==========================
-Git by itself is just a tool for maintaing multiple versions of collections of files in a distributed system.  However, in the node.js community and more broadly the open source world at large, there 
+Git by itself is just a tool for maintaing multiple versions of collections of files in a distributed system.  It is completely agnostic regarding how these repositories are distributed over the internet.  However, in node.js there is a preferred way to share repositories which is over github:
+
+* [GitHub](http://github.com)
 
 ## Setting up github
 
+To get started on github, first make an account.  As a student, you are entitled to a free small plan which allows you to have up to 5 private repositories.  To sign up for this account, go to the following URL:
+
+* [Free academic accounts on GitHub](http://github.com/edu)
+
+Once that is done, you will probably want to set up a shared RSA key so you don't have to keep typing your password each time you push something.  To do this, you should follow the instructions on the following website:
+
+* [Generating SSH keys](https://help.github.com/articles/generating-ssh-keys)
+
 ## Basic usage
+Once you have an account, it is pretty easy to create and share remote repositories.  To do this, you just click on the create new repository bytton in the upper right corner:
+
+<img src="lecture3/createarepo.png">
+
+Once you do that, you will get a screen that looks something like this:
+
+<img src="lecture3/configrepo.png">
+
+If you type in a name, and hit "Create repository" github will create a new empty remote repository for you.  You can now use this remote repository to back up one of your local git repositories online.  GitHub is pretty explicit in telling you how to do this.  If you look at the page, notice the following box,
+
+<img src="lecture3/pushremote.png">
+
+Typing the first line into your repository tells git to add a remote host called "origin" to the repository:
+
+```
+> git remote add origin git@github.com:mikolalysenko/test-repository.git
+```
+
+The second line,
+
+```
+> git push -u origin master
+```
+
+Pushes your master branch to the remote repository called origin.  In general, the syntax:
+
+```
+> git push remote-repo local-branch
+```
+
+Tells git to make a copy of your local repository branch on the remote repository called remote-repo.
+
+## Forking and patching
+
+The main advantage to using github to manage your repositories is that it is much easier to make contributions to existing open source projects.
+
+
+
 
 ## Other features
+The primary of function of github is that it offers you a convenient and simple way to store git repositories remotely.  This makes it much easier to collaborate on projects and maintain backups of your work.  However, GitHub also has many other useful features that make management of open source projects much easier.  The following is a brief survey of some of the more useful parts of GitHub.
 
 ### Markdown
 
@@ -222,7 +270,8 @@ Git by itself is just a tool for maintaing multiple versions of collections of f
 
 ### Issue tracking
 
-### Pull requests
+### NPM integration
+npm is also smart enough to be able to load packages from sources other than npm.  In particular, it understands git repositories and can read 
 
 
 
@@ -238,3 +287,6 @@ There are also a number of fun interactive tutorials to practice using git:
 
 The above reference is highly recommended and can be played as something like an interactive puzzle game.
 
+Finally, if you want to know more about the GitHub service, you can read their extensive online documentation and help here:
+
+* [https://help.github.com/](https://help.github.com/)
