@@ -121,25 +121,94 @@ If you accidentally add a file that you didn't mean to, you can unmark it using 
 nothing added to commit but untracked files present (use "git add" to track)
 ```
 
-You can also add tags to your commits to keep track of things like version numbers for your project.  The way this works is you use the `tag` command:
-
-```
-> git tag -a 1.0 -m "version 1.0"
-```
-
-You can then quickly reference the tagged branch using its alias.  For example,
-
-```
-> git show 1.0
-```
-
 ## Branching
-The above details are more-or-less standard in any competent version control system.  However what makes git unique is its powerful and simple distributed branching model.  At any time 
+The above details are more-or-less standard in any competent version control system.  However what makes git unique is its powerful and simple distributed branching model.  At any time you can create a branch from the current HEAD commit by typing `git branch`:
+
+```
+> git branch test
+> git branch
+* master
+  test
+```
+
+The main branch for a repository is called master, and there can be any number of subbranches.  Typing `git branch` with no arguments shows you a list of all the branches.  To switch the current branch you use the `checkout` command:
+
+```
+> git checkout test
+Switched to branch 'test'
+```
+
+You can then use these branches as check points to move around.  For example, suppose that in the test branch we add some more files:
+
+```
+> touch testfile.txt
+> git add testfile.txt
+> git commit -m "added testfile"
+[test 8312a30] added testfile
+ 0 files changed
+ create mode 100644 testfile.txt
+> ls
+README.md	testfile.txt
+```
+
+We can then switch back to the master branch again using git checkout:
+
+```
+> git checkout master
+Switched to branch 'master'
+> ls
+README.md	test.txt
+```
+
+And from here we could even make further changes:
+
+```
+> touch anotherfile.txt
+> git add anotherfile.txt
+> git commit -m "made another file"
+[master cf08781] made another file
+ 0 files changed
+ create mode 100644 anotherfile.txt
+```
+
+At this point the branch `test` and `master` have diverged.  Supposing that we want to apply the changes we made in `test` back to master, we can use the `merge` command to combine the two branches.  To merge the changes from `test` back into master, we can use the `merge` command:
+
+```
+> git merge test
+Merge made by the 'recursive' strategy.
+ 0 files changed
+ create mode 100644 testfile.txt
+```
+
+Then the results of making the test will be combined into a single branch in main.  If after doing this we don't want the old branch hanging around any more, we can remove it easily:
+
+```
+> git branch -d test
+Deleted branch test (was 8312a30).
+```
+
+Sometimes when merging you will get merge conflicts.  When this happens, git will print out a message like, 
+
+```
+$ git merge test
+Auto-merging test.txt
+CONFLICT (content): Merge conflict in test.txt
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+To verify this you can check the status using `git status` and manually go through and resolve the conflicts.  Once this is done, `git add` and `git commit` the changes to complete the merge.
+
+### Undoing things
+One of the most important aspects of branching is that this is how git also handles undoing and reverting actions.  Once you've made a commit in git, it is there for all time.  You can never permanently delete data from git, which greatly improves the robustness of the system.  Instead, if you want to go back to an earlier revision.  For example, if you want to go back to a previous version of your code, you can use the git checkout command again to revert to a previous using `git checkout` followed by the commit hash:
+
+
+To make changes to this commit, you can make a branch and update it.
+
 
 
 Collaborating using github
 ==========================
-GitHub 
+Git by itself is just a tool for maintaing multiple versions of collections of files in a distributed system.  However, in the node.js community and more broadly the open source world at large, there 
 
 ## Setting up github
 
