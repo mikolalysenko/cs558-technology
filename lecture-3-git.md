@@ -254,9 +254,15 @@ Pushes your master branch to the remote repository called origin.  In general, t
 
 Tells git to make a copy of your local repository branch on the remote repository called remote-repo.
 
-## Forking and patching
+## Cloning, forking and patching
 
-The main advantage to using github to manage your repositories is that it is much easier to make contributions to existing open source projects.
+The main advantage to using github to manage your repositories is that it is much easier to make contributions to existing open source projects.  For example, if you want to copy an existing repository from github, you can clone it using the git-clone command:
+
+```
+> git clone git@github.com:mikolalysenko/test-repository.git
+```
+
+
 
 
 

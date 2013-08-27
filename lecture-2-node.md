@@ -264,6 +264,9 @@ Once this is all done, you can publish your module on npm using [npm publish](ht
 
 After that, your module will show up on npm and then other people can install and use it in their own projects!
 
+### Semantic versioning
+
+
 
 # Further topics
 The above information is just a brief introduction to node.js.  There is a lot more stuff out there to learn about, especially in terms of getting to grips with all o
