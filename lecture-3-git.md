@@ -262,10 +262,9 @@ The main advantage to using github to manage your repositories is that it is muc
 > git clone git@github.com:mikolalysenko/test-repository.git
 ```
 
+You can also make copies of repositories directly on github using the fork feature.  This lets you own your own copy of the repository so you can make modifications and test things out yourself.
 
-
-
-
+Once you've made a change to a fork, you can also send a patch back upstream to the original using github's pull request feature.  The owner of the original repository can view the pull requests for their project, make comments and review the patch and ultimately accept or reject your changes.
 
 ## Other features
 The primary of function of github is that it offers you a convenient and simple way to store git repositories remotely.  This makes it much easier to collaborate on projects and maintain backups of your work.  However, GitHub also has many other useful features that make management of open source projects much easier.  The following is a brief survey of some of the more useful parts of GitHub.

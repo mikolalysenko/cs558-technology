@@ -266,7 +266,17 @@ After that, your module will show up on npm and then other people can install an
 
 ### Semantic versioning
 
+After you publish a module, it is likely that you will probably want to make changes down the road (if it becomes at all successful anyway).  These might be as simple as fixing a bug, adding a small feature or even as large as radically overhauling the interface.  However, for people who are using a module you probably don't want to suffer from massive breaking API changes and have to rewrite their programs, but at the same time they usually want to stay up to date with all the latest bug fixes.  This is a well known problem in software development, and if you don't anticipate it in advance it can be very difficult to manage.
 
+The way npm handles this issues is through a system called *semantic versioning*.  You can read more about it here:
+
+* [Semantic versioning specification](http://semver.org/)
+
+Semantic versioning is a set of conventions that if followed allow a package manager (like npm) to automatically select the best version of a dependency to use in any given project.  The way it works is that when you publish a package on npm, in your package.json you can specify a version string which consists of three numbers.  These correspond to the *major*, *minor* and *patch* version of your module, and have the following interpretation:
+
+* **PATCH** The patch version changes whenever you make a small bug fix or change that does not affect the external interface for the module.
+* **MINOR** The minor version increments whenever you make an addition to the interface that is backwards compatible with the previous
+* **MAJOR** The major version increments whenever you make a change that breaks the main interface.
 
 # Further topics
 The above information is just a brief introduction to node.js.  There is a lot more stuff out there to learn about, especially in terms of getting to grips with all o
