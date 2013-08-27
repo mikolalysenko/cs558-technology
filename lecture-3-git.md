@@ -270,15 +270,13 @@ Once you've made a change to a fork, you can also send a patch back upstream to 
 The primary of function of github is that it offers you a convenient and simple way to store git repositories remotely.  This makes it much easier to collaborate on projects and maintain backups of your work.  However, GitHub also has many other useful features that make management of open source projects much easier.  The following is a brief survey of some of the more useful parts of GitHub.
 
 ### Markdown
+For documenting your projects, github supports the [markdown](http://daringfireball.net/projects/markdown/) document mark up lanaguage.  If you create a file called README.md in the root of your project, GitHub will by default render this file on the first page of your repository.  This can be helpful in explaining and documenting how your code works.  npm also supports markdown, and by default will display your github README on your npm page if you have specified it.
 
-### Wikis
-
-### Issue tracking
+### Issue tracking, wikis and statistics
+GitHub has a built in bug tracker and wiki.  You can use this to keep track of feature requests and bugs in your project, as well as open up issues on other projects.  The wiki is again built on top of markdown and can be used to maintain more detailed documentation for your project.  Finally, GitHub also has a detailed statistics tracking API which is useful for viewing the branch history and commits of your project.
 
 ### NPM integration
-npm is also smart enough to be able to load packages from sources other than npm.  In particular, it understands git repositories and can read 
-
-
+npm is also smart enough to be able to load packages from sources other than npm.  In particular, it understands git repositories and can load modules from a git repository url.  There is also strong integration with github, and you can use it to directly load a module by specifying the username/repository as a dependency.
 
 References
 ==========
