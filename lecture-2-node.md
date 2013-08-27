@@ -72,8 +72,10 @@ fs.readFile("data.txt", function(err, data) {
   }
   
   //Otherwise, write the reversed contents
-  var reversed = data.toString().split("").reverse().join("")
-  fs.writeFile("reversed.txt", reversed, function(err, data) {
+  var loud = data.toString().toUpperCase()
+  
+  //Write upper case out
+  fs.writeFile("loud.txt", reversed, function(err, data) {
     console.log("done")
   })
 })
