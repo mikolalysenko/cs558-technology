@@ -281,7 +281,7 @@ The above material pretty much covers all the basics of JavaScript.  The fact th
 JavaScript does not support a classical inheritance model, but for performance reasons it does allow for the use of object templates or prototypes.  You should read about prototypes on your own to understand how this works and be able to explain when and why you might use a prototype to instantiate an object.
 
 ### Exceptions
-JavaScript supports exceptions, just like JavaScript.  There is also a built in object type called "Error" which tracks the line number at which it was first constructed.  This is useful for creating stack traces if your program performas an illegal operation at some point.
+JavaScript supports exceptions, just like Java.  There is also a built in object type called "Error" which tracks the line number at which it was first constructed.  This is useful for creating stack traces if your program performas an illegal operation at some point.
 
 ### Typed arrays
 Typed arrays are a relatively new feature in JavaScript, but they offer enormous performance benefits.  Unlike regular arrays which are basically objects, typed arrays are contiguous binary blocks of memory and have an enforced integer/floating point type.  Using typed arrays judiciously can give a large performance benefit in many applications.
