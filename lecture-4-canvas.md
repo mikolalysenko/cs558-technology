@@ -99,10 +99,52 @@ Each event gets passed an event object as the first argument which has a number 
 That pretty much covers the basics of writing JavaScript in the browser, and hopefully you didn't find it terribly complicated.  Where things get tricky is when we start looking at the specific properties and behaviors of the various elements, but fortunately it is pretty easy to find references that explain how all these details work in each specific circumstance.  The Web API is incredibly rich and has an utterly staggering number of features.  Using these things it is possible to create rich and responsive applications, as well as interactive demos.
 
 # Using modules in the browser
+By default, JavaScript is executed by the DOM using script tags.  For example, if you want to run some script file in a page, you just link it in using the `<script>` tag:
 
+```html
+<html>
+  <body>
+    <p>This page has a script on it</p>
+    <script type="text/javascript" src="myscript.js"></script>
+  </body>
+</html>
+```
 
+Scripts executed in this way do not come with any built in notion of modules, and so writing JavaScript using this style can quickly get a bit awkward.  Fortunately, there are plenty of simple tools out there that make it easy to run scripts using CommonJS modules/npm within a browser.  For the most part, this process is fairly seamless however, modules that use operating system specific functions like file system access obviously will not work within the DOM environment.
+
+Probably the most popular and best supported tool for running modules within a browser is [browserify](https://github.com/substack/node-browserify).  If you already have npm set up, you can easily install browserify using the following command:
+
+```sh
+npm install -g browserify
+```
+
+Once that's done, you can then compile your JavaScript to run in a browser using the following shell command:
+
+```sh
+browserify -d myscript.js > compiled.js
+```
+
+Browserify will parse all your code and build a single bundled script that you can include in your page.  For additional performance and size savings, this resulting script can also be minified using tools like uglify.js or jsmin.
+
+The above command needs to be run each time you update your project, which can get a bit tedious if you are developing something.  To speed things up, you should use a live reloading development server, like [beefy](https://github.com/chrisdickinson/beefy) for example.  Again, installing beefy is pretty easy to do using npm:
+
+```sh
+npm install -g beefy
+```
+
+And then to run your script in a browser, you can just do:
+
+```sh
+beefy --open myscript.js
+```
+
+Which should pop open a new browser window that runs your script.  For added efficiency, beefy supports live reloading, which means that as soon as you modify your script it will reload the page so you don't even have to refresh anything.
+
+Finally, the last major tool for browser based module development is [requirebin](http://requirebin.com/).  Requirebin lets you use modules from npm directly in your browser without even downloading or installing anything locally.  It can be very useful for quickly sharing and prototyping ideas, though for larger projects you would obviously want to use a separate text editor and build process.
 
 # Introduction to the canvas API
+
+
 
 # Further extensions
 
