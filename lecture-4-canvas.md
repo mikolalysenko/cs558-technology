@@ -1,6 +1,6 @@
-CS558 Technology Lecture 4: Working with browsers
+CS558 Technology Lecture 4: Browsers
 =================================================
-In this lecture, we are going to discuss the basics of using JavaScript in the browser.  This is not a course in web development, and so this material is in some sense not required.  However, being able to use and understand the browser can make it much easier to visualize and debug your code.  It also allows you to access 
+In this lecture, we are going to discuss the basics of using JavaScript in the browser.  This is not a course in web development, and so this material is in some sense not required, but being able to understand and use the browser can make it much easier to visualize and debug your projects.  It also allows you to make demos that you can publish on the web:
 
 # The DOM
 The document object model (or DOM) is the basic API of the web.  When you execute JavaScript within a browser, the DOM is the interface that the browser gives so that you can interact with items on the page.  The specification of the DOM is largely an ongoing process, and many of the details exist for a variety of technical, historical and social reasons.  The overall behavior though is exhaustively documented by the W3C and you can get a complete and precise description of the whole system from the W3C (which is the standards organization that oversees the DOM):
@@ -24,7 +24,7 @@ Obviously, this is a ton of material and I would not expect any of you to read t
 ```
 
 ## Searching the DOM
-The most basic task in dealing with the DOM is searching for specific elements on the page.  You can find individual elements using the `querySelector` method and sets of elements with the variant `querySelectorAll` that returns an array of all matches:
+The most basic task in dealing with the DOM is searching for specific elements on the page.  You can find individual elements using the [`querySelector` method](https://developer.mozilla.org/en-US/docs/Web/API/document.querySelector) and sets of elements with the variant [`querySelectorAll`](https://developer.mozilla.org/en-US/docs/Web/API/document.querySelectorAll) that returns an array of all matches:
 
 ```javascript
 element.querySelector("#someID")
@@ -54,13 +54,13 @@ document.querySelector("#foo").innerHTML = "A new paragraph"
 
 Doing this is a bit slow and also destroys the children of whatever element we are updating (breaking any references or listeners that we might have hooked onto the page).  To avoid this, the DOM also exposes several more structured interfaces which give more precise control over the structure of the document.
 
-For example, to create a new element we can use the `document.createElement` method:
+For example, to create a new element we can use the [`document.createElement` method](https://developer.mozilla.org/en-US/docs/Web/API/document.createElement):
 
 ```javascript
 var testParagraph = document.createElement("p")
 ```
 
-createElement takes a string which represents the type of the element to create.  Initially created elements are not part of the document, and have to be inserted using any of the following methods:
+createElement takes a string which represents the type of the element to create.  Initially created elements are not part of the document, and have to be inserted using either the [appendChild](https://developer.mozilla.org/en-US/docs/Web/API/Node.appendChild) or the [insertBefore](https://developer.mozilla.org/en-US/docs/Web/API/Node.insertBefore) functions:
 
 ```javascript
 element.appendChild(testParagraph)            //Appends testParagraph to the end of element's children list
@@ -68,17 +68,35 @@ element.insertBefore(testParagraph, child)    //Inserts testParagraph into the l
                                               //If child is not specified, testParagraph is inserted at the beginning
 ```
 
-Finally, we can also remove a child from an element by calling:
+Finally, we can also remove a child from an element by calling [removeChild](https://developer.mozilla.org/en-US/docs/Web/API/Node.removeChild):
 
 ```javascript
 element.removeChild(child)
 ```
 
 ## Events
-The above tells
+In addition to manipulating the state of the document, it is also important to be able to respond to inputs and events from the user.  In the DOM, this is handled using asynchronous events/callbacks, much the same way node.js deals with IO operations.  Every element in the DOM has an interface that exposes some number of events that can handled in JavaScript.  The precise nature of these events and what triggers them differs from element to element, but the overall interface is the same.  To handle and event, you use the [addEventListener function](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget.addEventListener):
+
+```javascript
+var element = document.querySelector("p")
+
+function clickHandler(event) {
+  element.appendChild(document.createTextNode("click!"))
+}
+
+element.addEventListener("click", clickHandler)
+```
+
+You can also remove an evenet listener from an element if you don't want it anymore using the [removeEventListener function](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget.removeEventListener):
+
+```javascript
+element.removeEventListener(clickHandler)
+```
+
+Each event gets passed an event object as the first argument which has a number of properties that vary depending on the type of event that is being handled.  For more information, you should look up the official documentation or check out some of the articles on the MDN.
 
 ## More details
-That pretty much covers the basics of manipulating the DOM, and hopefully you didn't find it terribly complicated.  Where things get tricky is when we start looking at the specific properties and behaviors of the various elements.  The basic Web API is incredibly rich and has an utterly staggering number of features.  Using these things it is possible to create rich and responsive applications that 
+That pretty much covers the basics of writing JavaScript in the browser, and hopefully you didn't find it terribly complicated.  Where things get tricky is when we start looking at the specific properties and behaviors of the various elements, but fortunately it is pretty easy to find references that explain how all these details work in each specific circumstance.  The Web API is incredibly rich and has an utterly staggering number of features.  Using these things it is possible to create rich and responsive applications, as well as interactive demos.
 
 # Using modules in the browser
 
@@ -87,6 +105,8 @@ That pretty much covers the basics of manipulating the DOM, and hopefully you di
 # Introduction to the canvas API
 
 # Further extensions
+
+## GitHub pages
 
 # References
 If you ever have any questions about how the DOM works in all the gory details, the definitive reference is the official W3C specification, which you can find here:
