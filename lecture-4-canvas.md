@@ -142,16 +142,83 @@ Which should pop open a new browser window that runs your script.  For added eff
 
 Finally, the last major tool for browser based module development is [requirebin](http://requirebin.com/).  Requirebin lets you use modules from npm directly in your browser without even downloading or installing anything locally.  It can be very useful for quickly sharing and prototyping ideas, though for larger projects you would obviously want to use a separate text editor and build process.
 
-# Introduction to the canvas API
+# Introduction to the Canvas API
+Now that we have covered the foundation of the DOM API, let's go into more detail on how to render graphics in a browser environment.  The DOM provides many ways to do this, including CSS manipulation, SVG, WebGL, and more -- but for the sake of simplicity we are going to focus on just one API:  canvas 2D.
 
+The canvas tag is a feature in HTML 5 that makes it very easy to render graphics and animations within the DOM.  The simplest way to add a canvas to a page is to declare a tag somewhere in your document.  For example,
 
+```html
+<html>
+  <head>
+    <title>Canvas demo</title>
+  </head>
+  <body>
+    <canvas width=500 height=500></canvas>
+  </body>
+</html>
+```
 
-# Further extensions
+It is also possible to create a canvas dynamically using `document.createElement`.  For example,
 
-## GitHub pages
+```javascript
+var canvas = document.createElement("canvas")
+canvas.width = 500
+canvas.height = 500
+document.body.appendChild(canvas)
+```
+
+Once we have a canvas, we can start drawing to it by acquiring a rendering context:
+
+```javascript
+var context = canvas.getContext("2d")
+
+//Draw a red rectangle
+context.fillStyle = "rgb(220, 0, 0)"
+context.fillRect(20, 20, 100, 100)
+```
+
+Getting started with canvas is pretty easy.  For a quick overview of the canvas API, you can check out the following 2-page quick reference card:
+
+<img src="lecture4/HTML5_Canvas_Cheat_Sheet.png">
+
+Some of the example things you can do with canvas 2D include:
+
+* Applying linear transformations
+* Drawing images
+* Drawing splines and polygons (both filled and unfilled)
+* Filtering operations
+
+## Animations
+Finally, it is also possible to create animations using the canvas API and JavaScript.  The simplest way to do this is with the requestAnimationFrame() API.  
+
+```javascript
+function drawFrame() {
+  requestAnimationFrame(drawFrame)
+
+  context.fillStyle = "rgb(0, 0, 0)")
+  context.fillRect(0, 0, 500, 500)
+
+  
+  var x = 250 - 100 * Math.cos(Date.now() * 0.01)
+
+  context.fillStyle = "rgb(255, 0, 0)"
+  context.fillRect(x, 100, 250, 250)
+}
+
+drawFrame()
+```
 
 # References
 If you ever have any questions about how the DOM works in all the gory details, the definitive reference is the official W3C specification, which you can find here:
 
+* 
 
-Needless to say, it is an
+Again, the best practical reference for learning how to work with DOM is the Mozilla developer's network.  Here you can find plenty of well written reviewed tutorials and accessible descriptions of the various DOM APIs:
+
+Regarding browserify, the best reference is probably the project's github page:
+
+You can also find out more about beefy on didact.us/beefy, though it is such a simple interface that there almost isn't anything to say.
+
+Finally, to learn more about canvas 2D, again the best reference is the MDN tutorials:
+
+
