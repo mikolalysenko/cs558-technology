@@ -211,14 +211,20 @@ drawFrame()
 # References
 If you ever have any questions about how the DOM works in all the gory details, the definitive reference is the official W3C specification, which you can find here:
 
-* 
+* [HTML 5 Specification](http://www.w3.org/html/wg/drafts/html/master/)
 
 Again, the best practical reference for learning how to work with DOM is the Mozilla developer's network.  Here you can find plenty of well written reviewed tutorials and accessible descriptions of the various DOM APIs:
 
+* [Mozilla Developer Netowrk](https://developer.mozilla.org/en-US/)
+
 Regarding browserify, the best reference is probably the project's github page:
 
-You can also find out more about beefy on didact.us/beefy, though it is such a simple interface that there almost isn't anything to say.
+* [Browserify](https://github.com/substack/node-browserify)
+
+You can also find out more about beefy here:
+
+* [Beefy](http://didact.us/beefy/)
 
 Finally, to learn more about canvas 2D, again the best reference is the MDN tutorials:
 
-
+* [Canvas Tutorial](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Canvas_tutorial)
